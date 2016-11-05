@@ -92,7 +92,8 @@ retrieve_matrix_values<-function(race,meetingId){
 #' retrieve_competitor_matrix_value(1,109501,10962625)
 retrieve_competitor_matrix_value<-function(race,meetingId,compEventId){
   val<-retrieve_competitor_market_values(race,meetingId,compEventId,'dw', 'positions','MTX PIR ACTUAL')
-  return(val)
+  if(length(val)<1) return(NA)
+  else return(val)
 }
 
 #' Retrieve TAB_VIC market prices
