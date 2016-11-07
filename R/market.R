@@ -111,3 +111,19 @@ retrieve_prices<-function(race,meetingId ){
   prices<-prices[prices!=0]
   return(prices)
 }
+
+#' Retrieve exlcude race indicator
+#' @param race event number 1....13
+#' @param meetingId meeting ID from DW API
+#' @keywords exclude race
+#' @export
+#' @examples
+#' retrieve_exclude(1,109501)
+retrieve_exclude<-function(race,meetingId){
+  events<-retrieve_markets( race, meetingId )
+  a<-paste('events$data$dw$`MTX SOLUTION PARAMS`$market$values$excludeRace')
+  exclude<-eval(parse(text=a))
+  if(length(exclude)<1) return(1)
+  else if(exclude=='false') return(1)
+  else if(exclude=='true') return(0)
+}
