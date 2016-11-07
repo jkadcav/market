@@ -124,6 +124,6 @@ retrieve_exclude<-function(race,meetingId){
   a<-paste('events$data$dw$`MTX SOLUTION PARAMS`$market$values$excludeRace')
   exclude<-eval(parse(text=a))
   if(length(exclude)<1) return(1)
-  else if(exclude=='false') return(1)
-  else if(exclude=='true') return(0)
+  else if(exclude=='FALSE') return(1)
+  else if(exclude=='TRUE') return(0)
 }
