@@ -46,7 +46,8 @@ retrieve_market_values<-function( race, meetingId, providerShortCode, attributeN
 
   a<-paste('events$data$',providerShortCode,'$`',dwItemName,'`$market$',attributeName,sep="")
   positions<-eval(parse(text=a))
-  return(positions)
+  if (length(positions)<1) return(NA)
+  else return(positions)
 }
 
 #' Retrieve DW market data for a specific competitor
@@ -62,10 +63,10 @@ retrieve_market_values<-function( race, meetingId, providerShortCode, attributeN
 #' retrieve_competitor_market_values(1,109501,10962625,CID, 'dw', 'positions', 'MTX PIR ACTUAL')
 retrieve_competitor_market_values<-function( race, meetingId, compEventId, providerShortCode, attributeName, dwItemName ){
   events<-retrieve_markets( race, meetingId )
-
   a<-paste('events$data$',providerShortCode,'$`',dwItemName,'`$market$',attributeName,'$`',compEventId,'`',sep="")
   mtx<-eval(parse(text=a))[[2]]
-  return(mtx)
+  if(length(mtx)<1) return(NA)
+  else return(mtx)
 }
 
 #' Retrieve DW market data for all competitors in an event
@@ -78,7 +79,8 @@ retrieve_competitor_market_values<-function( race, meetingId, compEventId, provi
 #' retrieve_matrix_values(1,109501,10962625)
 retrieve_matrix_values<-function(race,meetingId){
   val<-retrieve_market_values(race,meetingId,'dw', 'positions','MTX PIR ACTUAL')
-  return(val)
+  if (length(val)<1) return(NA)
+  else return(val)
 }
 
 #' Retrieve DW market data
